@@ -22,4 +22,13 @@ const create = async (req, res) => {
   return res.status(201).json(result.message);
 };  
 
+/* const exclude = async (req, res) => {
+  const { id } = req.body;
+  const result = await productsTable.exclude(id);
+
+  if (!result.id) return res.status(404).json({ message: 'Product not found' });
+
+  return res.status(204).json();
+}; */
+
 module.exports = { getAll, getById, create };

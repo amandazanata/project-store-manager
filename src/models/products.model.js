@@ -26,4 +26,23 @@ const create = async ({ product }) => {
   return { id: insertId, name: product };
 };
 
+/* const exclude = async (productId) => {
+  await connection.execute('DELETE FROM products WHERE id = (?);',
+    [productId]);
+
+  return true;
+}; */
+
 module.exports = { getAll, getById, create };
+
+// requisito 6
+/* const expected = [
+  {
+    "productId": 1,
+    "quantity": 1
+  },
+  {
+    "productId": 2,
+    "quantity": 5
+  }
+] */

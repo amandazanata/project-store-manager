@@ -47,15 +47,15 @@
     "tests": []
   },
   {
-    "_id": "09491e80-5b0d-4c83-a032-58709e82f549",
+    "_id": "b18ce6a5-9fef-48b7-b9f2-fa2ac9ce7b2f",
     "colId": "history",
     "containerId": "",
-    "name": "http://localhost:3001/products",
+    "name": "http://localhost:3001/products Copy",
     "url": "http://localhost:3001/products",
     "method": "POST",
     "sortNum": 0,
-    "created": "2023-05-09T12:58:46.457Z",
-    "modified": "2023-05-09T13:01:00.274Z",
+    "created": "2023-05-08T21:31:25.523Z",
+    "modified": "2023-05-09T13:13:00.992Z",
     "headers": [],
     "params": [],
     "body": {
@@ -63,6 +63,20 @@
       "raw": "{\n  \"id\": 4,\n  \"name\": \"ProdutoX\"\n}",
       "form": []
     },
+    "tests": []
+  },
+  {
+    "_id": "09491e80-5b0d-4c83-a032-58709e82f549",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/products",
+    "url": "http://localhost:3001/products/1",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-05-09T12:58:46.457Z",
+    "modified": "2023-05-09T20:21:38.929Z",
+    "headers": [],
+    "params": [],
     "tests": []
   },
   {

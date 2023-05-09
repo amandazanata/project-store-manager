@@ -19,4 +19,9 @@ const create = async (product) => {
   return { type: null, message: newProduct };
 };
 
+/* const exclude = async (productId) => {
+  const deleteProduct = await productsTable.exclude(productId);
+  return deleteProduct;
+}; */
+
 module.exports = { getAll, getById, create };
