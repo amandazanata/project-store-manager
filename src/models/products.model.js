@@ -23,7 +23,7 @@ const create = async ({ product }) => {
     [product],
   );
 
-  return { id: insertProduct, ...product };
+  return { id: insertProduct, name: product };
 };
 
 module.exports = { getAll, getById, create };

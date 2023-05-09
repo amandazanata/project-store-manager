@@ -12,9 +12,11 @@ const getById = async (id) => {
 };
 
 const create = async (product) => {
-  const newProduct = await productsTable.create(product);
+  const newProduct = await productsTable.create({ product });
 
-  return { message: newProduct };
+  if (newProduct.type) return newProduct;
+
+  return { type: null, message: newProduct };
 };
 
 module.exports = { getAll, getById, create };

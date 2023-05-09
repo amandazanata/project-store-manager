@@ -1,4 +1,4 @@
-const productsTable = require('../services/products.service');
+const { productsTable } = require('../services/products.service');
 
 const getAll = async (req, res) => {
   const product = await productsTable.getAll();
@@ -15,11 +15,11 @@ const getById = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const product = req.body;
-  const result = await productsTable.create(product);
+  const { name } = req.body;
+  const result = await productsTable.create(name);
 
-  if (result.type) return res.status(result.type).json(result.message);
+  if (result.type) return res.status(result.type).json({ message: result.message });
   return res.status(201).json(result.message);
-};
+};  
 
 module.exports = { getAll, getById, create };
