@@ -26,8 +26,24 @@ const create = async ({ product }) => {
   return { id: insertId, name: product };
 };
 
-const exclude = async (productId) => connection
-  .execute('DELETE FROM products WHERE id = (?);', [productId]);
+const exclude = async (productId) => {
+  const deleteQuery = 'DELETE FROM products WHERE id = (?);';
+  const [{ deleteBd }] = await connection.execute(deleteQuery, [productId]);
 
-  // return true;
+  console.log('deleta', deleteBd);
+  return deleteBd;
+};
+
 module.exports = { getAll, getById, create, exclude };
+
+// requisito 6
+/* const expected = [
+  {
+    "productId": 1,
+    "quantity": 1
+  },
+  {
+    "productId": 2,
+    "quantity": 5
+  }
+] */

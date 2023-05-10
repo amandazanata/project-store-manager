@@ -23,10 +23,10 @@ const create = async (req, res) => {
 };  
 
 const exclude = async (req, res) => {
-  const { id } = req.body;
-  const [result] = await productsTable.exclude(id);
+  const { id } = req.params;
+  const { type } = await productsTable.exclude(id);
 
-  if (!result.id) return res.status(404).json({ message: 'Product not found' });
+  if (type === 'erro') return res.status(404).json({ message: 'Product not found' });
 
   return res.status(204).json();
 };

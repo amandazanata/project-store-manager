@@ -19,6 +19,12 @@ const create = async (product) => {
   return { type: null, message: newProduct };
 };
 
-const exclude = async (productId) => productsTable.exclude(productId);
+const exclude = async (id) => {
+  const getProductId = await productsTable.getById(id);
+  if (getProductId === undefined) return { type: 'erro', statusCode: 404 };
+  await productsTable.exclude(id);
+
+  return { type: null, statusCode: 204 };
+};
 
 module.exports = { getAll, getById, create, exclude };
