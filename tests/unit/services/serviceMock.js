@@ -19,6 +19,11 @@ const correctObject = {
   ]
 };
 
+const updatedProduct = {
+  "id": 1,
+  "name": "Laço da mulher maravilha"
+};
+
 module.exports = {
   correctReturn,
   notFoundProduct,
@@ -26,4 +31,5 @@ module.exports = {
   createReturn,
   invalidProduct,
   correctObject,
+  updatedProduct,
 };

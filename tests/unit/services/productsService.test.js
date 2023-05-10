@@ -5,8 +5,7 @@ const salesService = require('../../../src/services/sales.service');
 const productsModel = require('../../../src/models/products.model');
 const productsService = require('../../../src/services/products.service');
 const { correctReturn,
-  notFoundProduct,
-  correctIdProduct,
+  updatedProduct,  
   createReturn,
   invalidProduct,
   correctObject,
@@ -67,6 +66,24 @@ describe('Testes de unidade do service dos produtos', function () {
     expect(result.message).to.equal('Product not found');
   });
 
+  it('Altera produto corretamente e retorna o produto alterado', async function () {
+    sinon.stub(productsModel, 'update').resolves({ affectedRows: 1 });
+    sinon.stub(productsModel, 'getById').resolves(updatedProduct);
+    const products = await productsService.update(1, 'Laço da mulher maravilha');
+
+    expect(products.type).to.be.equal(null);
+    expect(products.message).to.be.deep.equal(updatedProduct);
+  });
+
+  it('Não encontra o produto e retorna erro', async function () {
+    sinon.stub(productsModel, 'update').resolves({ affectedRows: 0 });
+    sinon.stub(productsModel, 'getById').resolves();
+    const products = await productsService.update(999, 'Laço da mulher maravilha');
+
+    expect(products.type).to.be.equal(404);
+    expect(products.message).to.be.deep.equal('Product not found');
+  });
+
   it('Success create', async function () {
     sinon.stub(productsModel, 'getAll').resolves(correctReturn);
     sinon.stub(salesService, 'getSales').resolves(2);
@@ -77,5 +94,21 @@ describe('Testes de unidade do service dos produtos', function () {
     ]);
 
     expect(result).to.deep.equal(correctObject);
+  });
+
+  it('Deleta produto corretamente', async function () {
+    sinon.stub(productsModel, 'exclude').resolves({ affectedRows: 1 });
+    const deletedProduct = await productsService.exclude(1);
+
+    expect(deletedProduct.type).to.be.equal(null);
+    expect(deletedProduct.message).to.be.deep.equal('');
+  });
+
+  it('Não encontra o produto e retorna erro', async function () {
+    sinon.stub(productsModel, 'exclude').resolves({ affectedRows: 0 });
+    const deletedProduct = await productsService.exclude(999);
+
+    expect(deletedProduct.type).to.be.equal(404);
+
   });
 });

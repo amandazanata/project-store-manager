@@ -47,4 +47,10 @@ describe('Testes de unidade do model dos produtos', function () {
 
     expect(result).to.equal();
   });
+
+  it('Insere um produto corretamente e retorna o id', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 7 }]);
+    const productId = await productsModel.create('Laço da mulher maravilha');
+    expect(productId).to.be.equal(7);
+  });
 });
