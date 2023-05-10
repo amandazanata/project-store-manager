@@ -28,8 +28,21 @@ describe('Testes de unidade do model dos produtos', function () {
     expect(result).to.be.deep.an('object');
     expect(result).to.be.deep.equal(correctReturn[0]);
   });
+
+  it('cadastrar produto na tabela sales', async function () {
+
+    sinon.stub(connection, 'execute').resolves([{ insertId: 10 }]);
+
+    const result = await productsModel.create();
+
+    expect(result).to.equal(10);
+  });
+  it('cadastrar produto na tabela sales_products', async function () {
+
+    sinon.stub(connection, 'execute').resolves();
+
+    const result = await productsModel.getSalesProducts();
+
+    expect(result).to.equal();
+  });
 });
-
-/* 
-
-*/
