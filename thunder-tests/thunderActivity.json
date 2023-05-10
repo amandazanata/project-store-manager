@@ -37,16 +37,16 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3001/products",
-    "url": "http://localhost:3001/products",
+    "url": "http://localhost:3001/products/30",
     "method": "PUT",
     "sortNum": 0,
     "created": "2023-05-08T21:31:25.523Z",
-    "modified": "2023-05-10T16:01:50.185Z",
+    "modified": "2023-05-10T18:04:07.364Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"id\": 4,\n  \"name\": \"Machado do Thor Lindão\"\n}",
+      "raw": "{\n  \"name\": \"Chave\"\n}",
       "form": []
     },
     "tests": []

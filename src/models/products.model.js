@@ -28,7 +28,8 @@ const create = async ({ product }) => { // ajuda do Ronald via slack
 
 const update = async (name, id) => {
   const [{ affectedRows }] = await connection
-    .execute('UPDATE products SET name = (?) WHERE id = (?);', [name, id]);
+  .execute('UPDATE products SET name = ? WHERE id = ?;', [name, id]);
+  /* console.log('parametros', affectedRows); */
   
   return affectedRows;
 };

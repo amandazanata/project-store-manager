@@ -19,10 +19,15 @@ const create = async (product) => { // ajuda do Ronald via slack
   return { type: null, message: newProduct };
 };
 
-const update = async (id, name) => {
-  const productFound = await productsTable.update(id, name);
-  if (productFound === 0) return { type: 404, message: 'Product not found' };
+const update = async (name, id) => {
+  const service = await productsTable.update(name, id);
   
+  const getProductId = await productsTable.getById(id);
+
+  if (service.affectedRows === 0 && !getProductId) {
+    return { type: 404, message: 'Product not found' };
+  }
+
   return { type: null, message: { id, name } };
 };
 

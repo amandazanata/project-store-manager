@@ -22,11 +22,20 @@ const create = async (req, res) => { // ajuda do Ronald via slack
   return res.status(201).json(result.message);
 };  
 
-const update = async (req, res) => {
+const update = async (req, res) => { // ajuda do Muri e do Ronald
   const { name } = req.body;
   const { id } = req.params;
-  const { type, message } = await productsTable.update(id, name);
+  
+  if (!name) {
+    return res.status(400).json({ message: '"name" is required' });
+  }
 
+  if (name.length < 5) {
+    return res.status(422).json({ message: '"name" length must be at least 5 characters long' });
+  }
+
+  const { type, message } = await productsTable.update(name, id);
+  
   if (type) return res.status(type).json({ message });
 
   return res.status(200).json(message);
