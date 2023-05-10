@@ -45,15 +45,15 @@ describe('Testes de unidade do service dos produtos', function () {
     expect(result.message).to.be.deep.equal('Product not found');
     expect(result.type).to.be.deep.equal('Product not found');
   });
-  
+
   it('Create /product', async function () {
-  
+
     sinon.stub(productsModel, 'create').resolves(createReturn);
-  
+
     const result = await productsService.create({
       "name": "ProdutoX"
     });
-  
+
     expect(result).to.be.an('object');
     expect(result.message).to.be.equal(createReturn);
   });

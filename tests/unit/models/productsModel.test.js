@@ -1,9 +1,10 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
+const salesModel = require('../../../src/models/sales.model');
 const productsModel = require('../../../src/models/products.model');
 const connection = require('../../../src/models/connection');
-const { correctReturn, notFoundProduct, correctIdProduct } = require('./modelMock');
+const { correctReturn, salesMockTestId, salesMockTest } = require('./modelMock');
 
 describe('Testes de unidade do model dos produtos', function () {
   afterEach(() => sinon.restore());
@@ -20,7 +21,7 @@ describe('Testes de unidade do model dos produtos', function () {
   });
 
   it('Verifica retorno de produtos via /products/:id', async function () {
-  
+
     sinon.stub(connection, 'execute').resolves([correctReturn]);
 
     const result = await productsModel.getById(0);
@@ -37,6 +38,7 @@ describe('Testes de unidade do model dos produtos', function () {
 
     expect(result).to.equal(10);
   });
+
   it('cadastrar produto na tabela sales_products', async function () {
 
     sinon.stub(connection, 'execute').resolves();

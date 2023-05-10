@@ -1,14 +1,9 @@
-const chai = require('chai');
+const { expect } = require('chai');
 const sinon = require('sinon');
-const sinonChai = require('sinon-chai');
-
-chai.use(sinonChai);
-
-const { expect } = chai;
 
 const productsService = require('../../../src/services/products.service');
 const productsController = require('../../../src/controllers/products.controller');
-const { correctReturn, productFound, correctIdProduct } = require('../controllers/controllerMocks');
+const { correctReturn, productFound, resolved } = require('../controllers/controllerMocks');
 
 describe('Testes de unidade do controller dos produtos', () => {
   afterEach(() => sinon.restore());
@@ -79,4 +74,3 @@ describe('Testes de unidade do controller dos produtos com id incorreta', () => 
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
   });
 });
-
