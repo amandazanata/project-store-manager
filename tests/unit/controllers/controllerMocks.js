@@ -109,13 +109,25 @@ const resultOfUpdate = {
   ]
 };
 
+const updatedProduct = {
+  "id": 1,
+  "name": "Laço da mulher maravilha"
+};
+
+const newProduct = {
+  "id": 7,
+  "name": "Laço da mulher maravilha"
+};
+
 module.exports = {
   correctReturn,
   productFound,
   resolved,
   saleToInsert,
+  newProduct,
   resultInsertSale,
   wrongSaleToInsert,
   oneSale,
   allSales,
+  updatedProduct,
 };

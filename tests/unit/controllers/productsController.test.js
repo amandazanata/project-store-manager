@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const productsService = require('../../../src/services/products.service');
 const productsController = require('../../../src/controllers/products.controller');
-const { correctReturn, productFound, resolved } = require('../controllers/controllerMocks');
+const { correctReturn, newProduct, updatedProduct } = require('../controllers/controllerMocks');
 
 describe('Testes de unidade do controller dos produtos', () => {
   afterEach(() => sinon.restore());
@@ -72,6 +72,62 @@ describe('Testes de unidade do controller dos produtos com id incorreta', () => 
 
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
+
+  it('Atualiza um produto corretamente e retorna o produto atualizado', async function () {
+    const req = {
+      body: { name: 'Laço da mulher maravilha' },
+      params: { id: 1 },
+    };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon
+      .stub(productsService, 'update')
+      .resolves({ type: null, message: updatedProduct });
+
+    await productsController.update(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(updatedProduct);
+  });
+
+  it('Tenta atualizar produto que não existe e retorna erro', async function () {
+    const req = {
+      body: { name: 'Laço da mulher maravilha' },
+      params: { id: 999 },
+    };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon
+      .stub(productsService, 'update')
+      .resolves({ type: 404, message: 'Product not found' });
+
+    await productsController.update(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
+
+  it('Insere um produto corretamente e retorna o status correto e o novo produto', async function () {
+    const req = {
+      body: { name: 'Laço da mulher maravilha' },
+    };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon
+      .stub(productsService, 'create')
+      .resolves({ type: null, message: newProduct });
+
+    await productsController.create(req, res);
+
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(newProduct);
   });
 
   it('Deleta produto que não existe e retorna erro', async function () {
