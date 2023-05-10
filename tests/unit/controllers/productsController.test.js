@@ -73,4 +73,22 @@ describe('Testes de unidade do controller dos produtos com id incorreta', () => 
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
   });
+
+  it('Deleta produto que não existe e retorna erro', async function () {
+    const req = {
+      params: { id: 999 },
+    };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon
+      .stub(productsService, 'exclude')
+      .resolves({ type: 404, message: 'Product not found' });
+
+    await productsController.exclude(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
 });
