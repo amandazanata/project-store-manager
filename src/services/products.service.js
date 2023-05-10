@@ -19,7 +19,7 @@ const create = async (product) => {
   return { type: null, message: newProduct };
 };
 
-const exclude = async (id) => {
+const exclude = async (id) => { // backend 5.5
   const getProductId = await productsTable.getById(id);
   if (getProductId === undefined) return { type: 'erro', statusCode: 404 };
   await productsTable.exclude(id);

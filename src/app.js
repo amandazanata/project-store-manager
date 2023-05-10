@@ -16,7 +16,7 @@ app.get('/', (_request, response) => {
 app.get('/products', controller.getAll);
 app.get('/products/:id', controller.getById);
 app.post('/products', nameValidation, controller.create);
-  app.post('/sales', correctInput, correctQuantity, salesController.getSales);
+app.post('/sales', correctInput, correctQuantity, salesController.getSales);
 app.delete('/products/:id', controller.exclude);
 
 // não remova essa exportação, é para o avaliador funcionar

@@ -26,7 +26,7 @@ const create = async ({ product }) => {
   return { id: insertId, name: product };
 };
 
-const exclude = async (productId) => {
+const exclude = async (productId) => { // backend 5.5
   const deleteQuery = 'DELETE FROM products WHERE id = (?);';
   const [{ deleteBd }] = await connection.execute(deleteQuery, [productId]);
 

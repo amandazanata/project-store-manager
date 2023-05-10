@@ -22,7 +22,7 @@ const create = async (req, res) => {
   return res.status(201).json(result.message);
 };  
 
-const exclude = async (req, res) => {
+const exclude = async (req, res) => { // backend 5.5
   const { id } = req.params;
   const { type } = await productsTable.exclude(id);
 
