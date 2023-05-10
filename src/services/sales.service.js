@@ -9,12 +9,14 @@ const getSales = async (products) => {
   const valid = getProductId.map((product) => product.id);
   const result = products.every((product) => valid.includes(product.productId));
   if (!result) return { type: 404, message: 'Product not found' };
+};
   
+const getSalesProducts = async (products) => {
   const valiDate = await salesFunctions.getSales();
   await Promise.all(products.map((product) => salesFunctions // 5.2 camada service gabarito
     .getSalesProducts(valiDate, product.productId, product.quantity)));
-  
+
   return { id: valiDate, itemsSold: products };
 };
 
-module.exports = { getSales };
+module.exports = { getSales, getSalesProducts };
