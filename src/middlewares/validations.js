@@ -10,24 +10,30 @@ const nameValidation = (req, res, next) => {
   return next();
 };
 
-const correctInput = async (sale) => {
-  const invalidProductId = sale.map(({ productId }) => {
-    if (!productId) return 'noProduct';
-    return '';
-  });
+const correctInput = (req, res, next) => {
+  const sale = req.body;
+  const validProductId = sale.every((product) => product.productId);
 
-  const validId = invalidProductId.some((product) => product === 'noProduct');
-  if (validId) return { type: 400, message: '"product" is required' };
+  if (!validProductId) {
+    return res.status(400).json({ message: '"productId" is required' });
+  }
+  return next();
 };
 
-const correctQuantity = async (sale) => {
-  const invalidQuantity = sale.map(({ quantity }) => {
-    if (!quantity) return 'noQuantity';
-    return '';
-  });
+const correctQuantity = (req, res, next) => {
+  const salesProducts = req.body;
 
-  const validQuantity = invalidQuantity.some((product) => product === 'noQuantity');
-  if (validQuantity) return { type: 400, message: '"quantity" is required' };
+  const validQuantity = salesProducts.every((sale) => Object.keys(sale).includes('quantity'));
+  if (!validQuantity) {
+    return res.status(400).json({ message: '"quantity" is required' });
+  }
+
+  const quantityValue = salesProducts.every((product) => product.quantity > 0);
+  if (!quantityValue) {
+    return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
+  }
+
+  return next();
 };
 
 module.exports = { nameValidation, correctInput, correctQuantity };
