@@ -17,7 +17,7 @@ const getById = async (id) => {
   return products;
 };
 
-const create = async ({ product }) => {
+const create = async ({ product }) => { // ajuda do Ronald via slack
   const [{ insertId }] = await connection.execute(
     'INSERT INTO products (name) VALUES (?);',
     [product],
@@ -26,15 +26,19 @@ const create = async ({ product }) => {
   return { id: insertId, name: product };
 };
 
-const exclude = async (productId) => { // backend 5.5
-  const deleteQuery = 'DELETE FROM products WHERE id = (?);';
-  const [{ deleteBd }] = await connection.execute(deleteQuery, [productId]);
-
-  console.log('deleta', deleteBd);
-  return deleteBd;
+const update = async (name, id) => {
+  const [{ affectedRows }] = await connection
+    .execute('UPDATE products SET name = (?) WHERE id = (?);', [name, id]);
+  
+  return affectedRows;
 };
 
-module.exports = { getAll, getById, create, exclude };
+const exclude = async (productId) => { // backend 5.5
+  await connection
+    .execute('DELETE FROM products WHERE id = (?);', [productId]);
+};
+
+module.exports = { getAll, getById, create, exclude, update };
 
 // requisito 6
 /* const expected = [

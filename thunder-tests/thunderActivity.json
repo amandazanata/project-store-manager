@@ -4,13 +4,18 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost/3001",
-    "url": "http://localhost/3001",
-    "method": "GET",
+    "url": "http://localhost:3001/products/2",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2023-05-08T19:20:32.445Z",
-    "modified": "2023-05-08T19:20:32.445Z",
+    "modified": "2023-05-10T15:06:07.670Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": 1,\n  \"name\": \"Martelo do Batman\"\n}",
+      "form": []
+    },
     "tests": []
   },
   {
@@ -33,15 +38,15 @@
     "containerId": "",
     "name": "http://localhost:3001/products",
     "url": "http://localhost:3001/products",
-    "method": "POST",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2023-05-08T21:31:25.523Z",
-    "modified": "2023-05-09T13:13:00.992Z",
+    "modified": "2023-05-10T16:01:50.185Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"id\": 4,\n  \"name\": \"ProdutoX\"\n}",
+      "raw": "{\n  \"id\": 4,\n  \"name\": \"Machado do Thor Lindão\"\n}",
       "form": []
     },
     "tests": []
@@ -61,6 +66,25 @@
     "body": {
       "type": "json",
       "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "7255a053-1297-4b94-a7a7-5b9902533147",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/products Copy",
+    "url": "http://localhost:3001/products",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-05-08T21:31:25.523Z",
+    "modified": "2023-05-09T13:13:00.992Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": 4,\n  \"name\": \"ProdutoX\"\n}",
       "form": []
     },
     "tests": []

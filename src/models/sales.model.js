@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-const getSales = async () => {
+const getSales = async () => { // backend 5.5
   const [{ insertId }] = await connection.execute(
     'INSERT INTO sales (date) VALUES (NOW());',
   );

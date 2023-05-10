@@ -1,7 +1,7 @@
 const salesFunctions = require('../services/sales.service');
 //  sale_id, product_id e quantity;
 
-const getSales = async (req, res) => {
+const getSales = async (req, res) => { // backend 5.5
   const result = await salesFunctions.getSales(req.body);
   if (result.type) return res.status(result.type).json({ message: result.message });
 

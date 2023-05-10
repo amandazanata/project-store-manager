@@ -14,13 +14,23 @@ const getById = async (req, res) => {
   return res.status(200).json(message);
 };
 
-const create = async (req, res) => {
+const create = async (req, res) => { // ajuda do Ronald via slack
   const { name } = req.body;
   const result = await productsTable.create(name);
 
   if (result.type) return res.status(result.type).json({ message: result.message });
   return res.status(201).json(result.message);
 };  
+
+const update = async (req, res) => {
+  const { name } = req.body;
+  const { id } = req.params;
+  const { type, message } = await productsTable.update(id, name);
+
+  if (type) return res.status(type).json({ message });
+
+  return res.status(200).json(message);
+};
 
 const exclude = async (req, res) => { // backend 5.5
   const { id } = req.params;
@@ -31,4 +41,32 @@ const exclude = async (req, res) => { // backend 5.5
   return res.status(204).json();
 };
 
-module.exports = { getAll, getById, create, exclude };
+module.exports = { getAll, getById, create, exclude, update };
+
+// https://dev.to/zagaris/build-a-restful-crud-api-with-node-js-2334
+/* Update a specific employee */
+
+/* router.put('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { name, job } = req.body;
+    const result = await schema.validateAsync({ name, job });
+    const employee = await employees.findOne({
+      _id: id,
+    });
+
+    // Employee does not exist
+    if (!employee) {
+      return next();
+    }
+
+    const updatedEmployee = await employees.update({
+      _id: id,
+    }, { $set: result },
+      { upsert: true });
+
+    res.json(updatedEmployee);
+  } catch (error) {
+    next(error);
+  }
+}); */
