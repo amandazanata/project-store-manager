@@ -14,6 +14,19 @@ const getById = async (req, res) => {
   return res.status(200).json(message);
 };
 
+/* const productByName = async (req, res) => {
+  const { q } = req.query;
+  if (q === '') {
+    const { message } = await productService.allProduct();
+    return res.status(200).json({ message });
+  }
+  const { type, message } = await productService.productByName(q);
+  if (type) {
+    return res.status(type).json({ message });
+  }
+  return res.status(200).json({ message });
+}; */
+
 const create = async (req, res) => { // ajuda do Ronald via slack
   const { name } = req.body;
   const result = await productsTable.create(name);

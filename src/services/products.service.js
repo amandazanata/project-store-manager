@@ -11,6 +11,12 @@ const getById = async (id) => {
   return { type: null, message: productFound };
 };
 
+/* const productByName = async (name) => {
+  const result = await productModel.productByName(name);
+  if (!result) return { type: 404, message: 'Product not found' };
+  return { type: null, message: result };
+}; */
+
 const create = async (product) => { // ajuda do Ronald via slack
   const newProduct = await productsTable.create({ product });
 

@@ -16,6 +16,15 @@ const getById = async (id) => {
 
   return products;
 };
+/* 
+const productByName = async (name) => {
+  const nameForLike = `%${name}%`;
+  const [result] = await connection.execute(
+    `SELECT * FROM products WHERE name LIKE "${nameForLike}"`,
+    [],
+  );
+  return result;
+}; */
 
 const create = async ({ product }) => { // ajuda do Ronald via slack
   const [{ insertId }] = await connection.execute(
