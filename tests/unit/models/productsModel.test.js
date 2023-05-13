@@ -1,10 +1,9 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const salesModel = require('../../../src/models/sales.model');
 const productsModel = require('../../../src/models/products.model');
 const connection = require('../../../src/models/connection');
-const { correctReturn, salesMockTestId, salesMockTest } = require('./modelMock');
+const { correctReturn } = require('./modelMock');
 
 describe('Testes de unidade do model dos produtos', function () {
   afterEach(() => sinon.restore());

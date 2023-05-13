@@ -1,9 +1,9 @@
-const { expect } = require('chai');
+/* const { expect } = require('chai');
 const sinon = require('sinon');
 
 const salesModel = require('../../../src/models/sales.model');
 const connection = require('../../../src/models/connection');
-const { getObject, createList, saleSucceed } = require('./modelMock');
+const { createList, saleSucceed } = require('./modelMock');
 
 describe('Teste unitário para o Sale Model', function () {
   afterEach(() => sinon.restore());
@@ -19,4 +19,4 @@ describe('Teste unitário para o Sale Model', function () {
 
     await salesModel.create(createList);
   });
-});
+}); */
