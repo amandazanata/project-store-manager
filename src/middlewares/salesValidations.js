@@ -4,10 +4,9 @@ const productValidate = async (req, res, next) => {
   const sales = req.body;
 
   const validId = sales.some(({ productId }) => !productId);
-
-    if (validId) {
-        return res.status(400).json({ message: '"productId" is required' });
-    }
+  if (validId) {
+    return res.status(400).json({ message: '"productId" is required' });
+  }
 
   const productExists = sales.map(async ({ productId }) => {
     const { type } = await productService.getById(productId);
@@ -15,12 +14,11 @@ const productValidate = async (req, res, next) => {
   });
 
   const result = await Promise.all(productExists);
+  if (result.includes(false)) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
 
-     if (result.includes(false)) {
-       return res.status(404).json({ message: 'Product not found' });
-     }
-
-  next();
+  return next();
 };
 
 /* const validationQuantity = async (req, res, next) => {
