@@ -71,15 +71,6 @@ describe('Testes de unidade do service dos produtos', function () {
     expect(result.message).to.equal('Product not found');
   });
 
-/*   it('Altera produto corretamente e retorna o produto alterado', async function () {
-    sinon.stub(productsModel, 'update').resolves({ affectedRows: 1 });
-    sinon.stub(productsModel, 'getById').resolves(updatedProduct);
-    const products = await productsService.update(1, 'Laço da mulher maravilha');
-
-    expect(products.type).to.be.equal(null);
-    expect(products.message).to.be.deep.equal(updatedProduct);
-  }); */
-
   it('Não encontra o produto e retorna erro', async function () {
     sinon.stub(productsModel, 'update').resolves({ affectedRows: 0 });
     sinon.stub(productsModel, 'getById').resolves();
@@ -88,6 +79,15 @@ describe('Testes de unidade do service dos produtos', function () {
     expect(products.type).to.be.equal(404);
     expect(products.message).to.be.deep.equal('Product not found');
   });
+
+  /*   it('Altera produto corretamente e retorna o produto alterado', async function () {
+    sinon.stub(productsModel, 'update').resolves({ affectedRows: 1 });
+    sinon.stub(productsModel, 'getById').resolves(updatedProduct);
+    const products = await productsService.update(1, 'Laço da mulher maravilha');
+
+    expect(products.type).to.be.equal(null);
+    expect(products.message).to.be.deep.equal(updatedProduct);
+  }); */
 
   /* it('Success create', async function () {
     sinon.stub(productsModel, 'getAll').resolves(correctReturn);
