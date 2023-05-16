@@ -8,7 +8,7 @@ chai.use(sinonChai);
 
 const productsModel = require('../../../src/models/products.model');
 const connection = require('../../../src/models/connection');
-const { correctReturn, productModelMock } = require('./modelMock');
+const { correctReturn, productModelMock } = require('./model.mock');
 
 describe('Testes de unidade do model dos produtos', function () {
   afterEach(() => sinon.restore());
