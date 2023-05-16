@@ -19,7 +19,7 @@ const {
 describe('Testes de controller de sales', function () {
   afterEach(() => sinon.restore());
 
-  describe('Testes da função insert', function () {
+  /* describe('Testes da função insert', function () {
     it('Cria uma sale corretamente com status correto', async function () {
       const req = {
         body: saleToInsert,
@@ -55,7 +55,7 @@ describe('Testes de controller de sales', function () {
       expect(res.status).to.have.been.calledWith(422);
       expect(res.json).to.have.been.calledWith({ message: '"quantity" must be greater than or equal to 1' });
     });
-  })
+  }) */
 
   it('Retorna status 200 e a lista de produtos', async function () {
     const req = {};

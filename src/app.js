@@ -1,7 +1,7 @@
 const express = require('express');
 const controller = require('./controllers/products.controller');
 const salesController = require('./controllers/sales.controller');
-const { nameValidation } = require('./middlewares/productValidations');
+const { nameValidation } = require('./middlewares/validations');
 const { validationProduct, validationQuantity } = require('./middlewares/salesValidations');
 
 require('express-async-errors');

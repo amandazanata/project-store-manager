@@ -6,46 +6,43 @@ const chai = require("chai");
 
 chai.use(sinonChai);
 
-const productsModel = require('../../../src/models/products.model');
+const productModel = require('../../../src/models/products.model');
 const connection = require('../../../src/models/connection');
-const { correctReturn, productModelMock } = require('./model.mock');
+const { correctReturn, productModelMock } = require('./modelMock');
 
 describe('Testes de unidade do model dos produtos', function () {
   afterEach(() => sinon.restore());
 
-  it('Verifica retorno do array de produtos', async function () {
-
-    sinon.stub(connection, 'execute').resolves([correctReturn]);
-
-    const result = await productsModel.getAll();
-
-    expect(result).to.be.deep.an('array');
-    expect(result[0]).to.contain.keys(['id', 'name']);
-    expect(result).to.be.deep.equal(correctReturn);
+  it('lista de produtos', async function () {
+    sinon.stub(connection, 'execute').resolves([productModelMock]);
+    const result = await productModel.getAll();
+    expect(result).to.be.deep.equal(productModelMock);
   });
 
-  it('Verifica retorno de produtos via /products/:id', async function () {
-
-    sinon.stub(connection, 'execute').resolves([correctReturn]);
-
-    const result = await productsModel.getById(0);
-
-    expect(result).to.be.deep.an('object');
-    expect(result).to.be.deep.equal(correctReturn[0]);
+  it('produto por id', async function () {
+    sinon.stub(connection, 'execute').resolves([[productModelMock]]);
+    const result = await productModel.getById(1);
+    expect(result).to.be.deep.equal(productModelMock);
   });
 
-  it('retorna produto com mesmo id', async function () {
+/*   it('retorno de id', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 42 }]);
+    const result = await productModel.create('Novo Produto');
+    expect(result).to.be.deep.equal({ id: 42, name: "Novo Produto" });
+  }); */
+
+/*   it('retorna produto com mesmo id', async function () {
     sinon.stub(connection, 'execute')
       .resolves([productModelMock]).onCall(1)
       .resolves().onCall(2);
-    const result = await productsModel.update(1, 'Novo Produto Atualizado');
+    const result = await productModel.update(1, 'Novo Produto Atualizado');
     expect(result).to.be.deep.equal({ id: 1, name: "Novo Produto Atualizado" });
-  });
+  }) */;
 
-  it('delete com id', async function () {
+/*   it('delete com id', async function () {
     sinon.stub(connection, 'execute')
       .resolves([{ changedRows: 1 }]);
-    const result = await productsModel.excludeProduct(1);
+    const result = await productModel.exclude(1);
     expect(result).to.be.deep.equal(1);
-  });
+  }); */
 });

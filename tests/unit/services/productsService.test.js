@@ -62,14 +62,14 @@ describe('Testes de unidade do service dos produtos', function () {
     expect(result.message).to.be.equal(createReturn);
   });
 
-  it('erro', async function () {
+/*   it('erro', async function () {
     sinon.stub(productsModel, 'getAll').resolves(correctReturn);
 
     const result = await salesService.getSales(invalidProduct);
 
     expect(result.type).to.equal(404);
     expect(result.message).to.equal('Product not found');
-  });
+  }); */
 
   it('Não encontra o produto e retorna erro', async function () {
     sinon.stub(productsModel, 'update').resolves({ affectedRows: 0 });

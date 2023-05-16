@@ -1,5 +1,5 @@
 const salesFunctions = require('../models/sales.model');
-const { validateProduct } = require('../middlewares/productValidations');
+const { validateProduct } = require('../middlewares/validations');
 // id e date
 
 // abstração com ajuda da Fani

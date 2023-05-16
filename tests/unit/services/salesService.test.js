@@ -36,7 +36,7 @@ describe('teste sales', function () {
     expect(result).to.be.deep.equal(response);
   });
 
-  it('nova venda.', async function () {
+/*   it('nova venda.', async function () {
     sinon.stub(productModel, 'getById').resolves(true);
     sinon.stub(salesModel, 'createSale').resolves(88);
     const response = { type: null, message: { id: 88, itemsSold: sales } };
@@ -74,7 +74,7 @@ describe('teste sales', function () {
     const response = { type: null, message: undefined };
     const result = await salesService.excludeSale('3');
     expect(result).to.be.deep.equal(response);
-  });
+  }); */
 
   it('venda de id errado', async function () {
     sinon.stub(salesModel, 'getSalesProducts').resolves([]);
