@@ -35,8 +35,10 @@ const update = async (name, id) => {
 };
 
 const exclude = async (productId) => { // backend 5.5
-  await connection
+  const response = await connection
     .execute('DELETE FROM products WHERE id = (?);', [productId]);
+  
+  return response;
 };
 
 module.exports = { getAll, getById, create, exclude, update };

@@ -1,18 +1,28 @@
 const connection = require('./connection');
 
 const getSales = async () => { // backend 5.5
-  const [{ insertId }] = await connection.execute(
-    'INSERT INTO sales (date) VALUES (NOW());',
+  const [result] = await connection.execute(
+    `SELECT sales.id AS saleId, sales.date AS date,
+    product.product_id AS productId,
+    product.quantity AS quantity
+    FROM StoreManager.sales AS sales
+    JOIN StoreManager.sales_products AS product
+    ON product.sale_id = sales.id;`,
   );
-
-  return insertId;
+  return result;
 };
 
-const getSalesProducts = async (saleId, idProduct, quantityId) => {
-  await connection.execute(
-    'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?);',
-    [saleId, idProduct, quantityId],
+const getSalesProducts = async (id) => {
+  const [result] = await connection.execute(
+    `SELECT sales.date AS date,
+    product.product_id AS productId,
+    product.quantity AS quantity
+    FROM StoreManager.sales AS sales
+    JOIN StoreManager.sales_products AS product
+    ON product.sale_id = sales.id
+    WHERE sales.id = ?;`, [id],
   );
+  return result;
 };
 
 const createSale = async () => {
@@ -34,30 +44,22 @@ const createSaleProduct = async (id, { productId, quantity }) => {
   return result;
 };
 
-const updateSale = async (id, { productId, quantity }) => {
-  await connection.execute(
-    'UPDATE sales_products SET quantity = (?) WHERE sale_id = (?) AND product_id = (?)',
-    [quantity, id, productId],
-  );
+const updateSale = async (saleId, arraySales) => {
+    const promise = await arraySales.map(async ({ quantity, productId }) => {
+      await connection.execute(
+        `UPDATE StoreManager.sales_products
+      SET quantity = ?
+      WHERE sale_id = ?
+      AND product_id = ?;`,
+        [quantity, saleId, productId],
+      );
+    });
 
-  const result = { id, productId, quantity };
-
-  return result;
-};
-
-const deleteSale = async (id) => {
-  await connection.execute('DELETE FROM sales WHERE id = (?)', [id]);
-};
-
-const deleteProduct = async (id) => {
-  await connection.execute('DELETE FROM sales_products WHERE sale_id = (?)', [id]);
-};
+    await Promise.all(promise);
+  };
 
 const excludeSale = async (id) => {
-  await deleteProduct(id);
-  const response = await deleteSale(id);
-
-  return response;
+  await connection.execute('DELETE FROM sales WHERE id = (?)', [id]);
 };
 
 module.exports = {

@@ -40,6 +40,7 @@ const update = async (name, id) => {
 const exclude = async (id) => { // backend 5.5
   const getProductId = await productsTable.getById(id);
   if (getProductId === undefined) return { type: 'erro', statusCode: 404 };
+
   await productsTable.exclude(id);
 
   return { type: null, statusCode: 204 };

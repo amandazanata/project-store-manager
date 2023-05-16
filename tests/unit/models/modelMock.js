@@ -62,6 +62,28 @@ const savedSale = {
   ]
 };
 
+const productModelMock = [
+  {
+    "id": 1,
+    "name": "Martelo de Thor"
+  },
+  {
+    "id": 2,
+    "name": "Traje de encolhimento"
+  },
+  {
+    "id": 3,
+    "name": "Escudo do Capitão América"
+  }
+]
+
+const productSearchByName = [
+  {
+    "id": 1,
+    "name": "Martelo de Thor"
+  }
+]
+
 module.exports = {
   correctReturn,
   notFoundProduct,
@@ -71,4 +93,6 @@ module.exports = {
   savedSale,
   getSales,
   saleSucceed,
+  productModelMock,
+  productSearchByName,
 };

@@ -1,10 +1,8 @@
 const express = require('express');
 const controller = require('./controllers/products.controller');
 const salesController = require('./controllers/sales.controller');
-const {
-  nameValidation,
-  correctInput,
-  correctQuantity } = require('./middlewares/validations');
+const { nameValidation } = require('./middlewares/productValidations');
+const { validationProduct, validationQuantity } = require('./middlewares/salesValidations');
 
 require('express-async-errors');
 
@@ -25,8 +23,8 @@ app.delete('/products/:id', controller.exclude);
 
 app.get('/sales', salesController.getSales);
 app.get('/sales/:id', salesController.getSalesProducts);
-app.post('/sales', correctInput, correctQuantity, salesController.getSales);
-app.put('/sales/:id', correctInput, correctQuantity, salesController.updateSale);
+app.post('/sales', validationProduct, validationQuantity, salesController.createSale);
+app.put('/sales/:id', validationProduct, validationQuantity, salesController.updateSale);
 app.delete('/sales/:id', salesController.excludeSale);
 
 // não remova essa exportação, é para o avaliador funcionar

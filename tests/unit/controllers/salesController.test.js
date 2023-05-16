@@ -1,6 +1,10 @@
-/* 
 const { expect } = require('chai');
 const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
+
+const chai = require("chai");
+
+chai.use(sinonChai);
 
 const salesService = require('../../../src/services/sales.service');
 const salesController = require('../../../src/controllers/sales.controller');
@@ -103,4 +107,32 @@ describe('Testes de controller de sales', function () {
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Sale not found' });
   });
-}); */
+
+  it('erro update id', async function () {
+    sinon.stub(salesService, 'updateSale').resolves({ type: 404, message: 'Sale not found' });
+
+    const req = { params: { id: '9765' } };
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns(res);
+
+    await salesController.updateSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Sale not found' });
+  });
+
+  it('deleta sale', async function () {
+    sinon.stub(salesService, 'excludeSale').resolves({ type: null, message: undefined });
+
+    const req = { params: { id: '1' } };
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.end = sinon.stub().returns();
+
+    await salesController.excludeSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(204);
+    expect(res.end).to.have.been.calledWith();
+  });
+});
