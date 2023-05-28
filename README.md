@@ -12,6 +12,8 @@ A API construída é um sistema de gerenciamento de vendas no formato dropshippi
 - Docker;
 - Manipulação de banco de Dados Relacionais - MySQL;
 - Desenvolvimento com Node.js com Runtime Assíncrono;
+- CRUD (Create, Read, Update, Delete);
+- Requisições HTTP;
 - API Rest com Express, MySQL e Router;
 - Middlewares e tratamento de erros;
 - Arquitetura MSC (model-service-controller);
